@@ -5,7 +5,9 @@ import re
 
 def rename_file(file_path):
     filename = os.path.basename(file_path)
+    file_extension = filename.split('.', maxsplit=1)[-1]
     directory = os.path.dirname(file_path)
+
     initial_groups = re.search(args.initial, filename)
 
     if initial_groups is not None:
@@ -19,6 +21,9 @@ def rename_file(file_path):
 
     for group in desired_groups:
         result = result.replace(group, initial_groups[group.replace('[', '').replace(']', '')])
+
+    if file_extension != filename:
+        result = result + '.' + file_extension
 
     os.rename(file_path, os.path.join(directory, result))
 

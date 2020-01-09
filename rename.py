@@ -29,11 +29,14 @@ def rename_file(file_path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--subdirectories', action='store_true', help='Rename files inside of subdirectories.')
-    parser.add_argument('directory', help="The directory containing files to be renamed.", )
-    parser.add_argument("initial", help="The initial regex pattern of all files to be renamed.")
-    parser.add_argument("desired", help="The desired  pattern of all files to be renamed.")
+    parser = argparse.ArgumentParser(
+        description='Bulk rename files using regex',
+        epilog='Report any issues at - https://github.com/alwian/py-rename/issues'
+    )
+    parser.add_argument('-s', '--subdirectories', action='store_true', help='rename files inside of subdirectories')
+    parser.add_argument('directory', help="the directory containing files to be renamed", )
+    parser.add_argument("initial", help="the initial regex pattern of all files to be renamed")
+    parser.add_argument("desired", help="the desired  pattern of all files to be renamed")
     args = parser.parse_args()
 
     if not os.path.isdir(args.directory):
